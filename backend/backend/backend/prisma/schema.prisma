@@ -1,0 +1,31 @@
+// ملف تعريف قاعدة البيانات باستخدام Prisma ORM
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Employee {
+  id              Int       @id @default(autoincrement())
+  name            String
+  nationalId      String
+  birthDate       DateTime
+  bankAccount     String
+  bankName        String
+  jobTitle        String
+  workDaysPerWeek Int
+  startDate       DateTime
+  endDate         DateTime?
+  hasAbsence      Boolean   @default(false)
+  absenceDays     Int       @default(0)
+  overtimeDays    Int       @default(0)
+  overtimeDate    DateTime?
+  notes           String?
+  approvalFile    String?   // رابط ملف الموافقة المرفوعة
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+}
